@@ -8,12 +8,13 @@ def bayer(n):
     M = np.array(((2*n)**2)*bayer(n/2))
     return np.concatenate((np.concatenate((M, M+2), axis=1), np.concatenate((M+3, M+1), axis=1)), axis=0)/((2*n)**2)
 
-image_name = '3.jpg'
+image_name = 'RGB_24bits_palette_sample_image.jpg'
+# image_name = 'eric-jacob-G0miZ5OYaXI-unsplash.jpg'
 original_image = Image.open(image_name)
 
 image_matrix = np.array(original_image) 
 image_size = image_matrix.shape[:2]
-# original_image.show()
+original_image.show()
 
 grayscale_matrix = np.array([
     [
@@ -23,14 +24,14 @@ grayscale_matrix = np.array([
 ])
 
 grayscale_image = Image.fromarray(grayscale_matrix)
-# grayscale_image.show()
+grayscale_image.show()
 
 window_size = int(input('Enter Window Size:   '))//2
 
 matrix = bayer(window_size)*255
-print(matrix)
+# print(matrix)
 
-print(matrix.shape)
+# print(matrix.shape)
 
 dithered_matrix = np.zeros((image_size[0], image_size[1]))
 
