@@ -34,6 +34,7 @@ matrix = bayer(window_size)*255
 # print(matrix.shape)
 
 dithered_matrix = np.zeros((image_size[0], image_size[1]))
+result_string = ''
 
 for x in range(image_size[0]):
     for y in range(image_size[1]):
@@ -41,8 +42,12 @@ for x in range(image_size[0]):
         j = y % matrix.shape[1]
         if grayscale_matrix[x][y] > matrix[i][j]:
             dithered_matrix[x][y] = 255
+            result_string += '.'
         else:
             dithered_matrix[x][y] = 0
+            result_string += ' '
+    result_string += '\n'
+print(result_string)
 
 dithered_image = Image.fromarray(dithered_matrix)
 # print(dithered_matrix)
